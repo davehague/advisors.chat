@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Mark JS as available before paint so scroll-reveal styles apply only when JS can undo them.
+       Without JS, content stays fully visible. -->
+  <script>document.documentElement.classList.add("js");</script>
+  <title>advisors.chat — Convene a board of advisors for every big decision</title>
+  <meta name="description" content="Bring your toughest business decisions to a board of advisors — minds you trust, debating in rounds and handing you a clear verdict with the dissent. Defined in plain Markdown, run as a series of LLM calls." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="advisors.chat — the boardroom, in a file" />
+  <meta property="og:description" content="Bring your toughest business decisions to a board of advisors who actually debate them — then hand you a verdict, the dissent, and the why." />
+  <meta property="og:url" content="https://advisors.chat" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- grain + texture overlays -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ───────────────────────── NAV ───────────────────────── -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="advisors.chat home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+          <circle cx="16" cy="16" r="9.5" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="16" cy="4.4" r="2.1" fill="currentColor"/>
+          <circle cx="27.6" cy="16" r="2.1" fill="currentColor"/>
+          <circle cx="16" cy="27.6" r="2.1" fill="currentColor"/>
+          <circle cx="4.4" cy="16" r="2.1" fill="var(--amber)"/>
+        </svg>
+      </span>
+      <span class="brand__word">advisors<span class="brand__dot">.</span>chat</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#board">The board</a>
+      <a href="#deliverables">What you get</a>
+      <a class="nav__cta" href="mailto:david.hague@gmail.com?subject=advisors.chat%20—%20notify%20me&body=I'd%20like%20to%20know%20when%20advisors.chat%20opens%20up.">Get notified</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ───────────────────────── HERO ───────────────────────── -->
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal" data-d="0">A decision-making studio · coming soon</p>
+          <h1 class="hero__title">
+            <span class="reveal" data-d="1">Convene a board</span>
+            <span class="reveal" data-d="2">of advisors for</span>
+            <span class="reveal" data-d="3">every big <em>decision</em>.</span>
+          </h1>
+          <p class="hero__lede reveal" data-d="4">
+            Bring your hardest call to a panel of minds you trust. They argue it out
+            in rounds — positions, rebuttals, a real vote — and hand you a verdict,
+            the dissent, and the <em>why</em>. You write the question in plain
+            Markdown; they do the thinking.
+          </p>
+          <div class="hero__actions reveal" data-d="5">
+            <a class="btn btn--primary" href="mailto:david.hague@gmail.com?subject=advisors.chat%20—%20notify%20me&body=I'd%20like%20to%20know%20when%20advisors.chat%20opens%20up.">
+              Get notified at launch
+            </a>
+            <a class="btn btn--ghost" href="#how">See how it works →</a>
+          </div>
+          <p class="hero__note reveal" data-d="6">No login. No noise. One email when it's ready.</p>
+        </div>
+
+        <!-- Verdict card visual -->
+        <div class="hero__visual reveal" data-d="4">
+          <div class="card-verdict" id="verdictCard">
+            <div class="card-verdict__head">
+              <span class="tag">/boardroom</span>
+              <span class="card-verdict__meta">2 rounds · 4 advisors</span>
+            </div>
+            <p class="card-verdict__q"><span class="hash">##</span> Should we raise prices 20% this quarter?</p>
+            <ul class="ballot">
+              <li class="ballot__row" data-vote="conditional">
+                <span class="ballot__who">Derek Sivers</span>
+                <span class="ballot__vote">conditional</span>
+              </li>
+              <li class="ballot__row" data-vote="yes">
+                <span class="ballot__who">Alex Hormozi</span>
+                <span class="ballot__vote">yes</span>
+              </li>
+              <li class="ballot__row" data-vote="conditional">
+                <span class="ballot__who">Annie Duke</span>
+                <span class="ballot__vote">conditional</span>
+              </li>
+              <li class="ballot__row" data-vote="yes">
+                <span class="ballot__who">Pieter Levels</span>
+                <span class="ballot__vote">yes</span>
+              </li>
+            </ul>
+            <div class="card-verdict__foot">
+              <span class="verdict-pill">Verdict · Conditional yes</span>
+              <span class="card-verdict__sub">raise it — but grandfather your first 50 customers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── PROBLEM STRIP ───────────────────────── -->
+    <section class="strip">
+      <p class="strip__text">
+        The biggest calls in a small business — pricing, hiring, a pivot, a launch —
+        get made on a gut feeling and a quick poll in Slack.
+        <strong>They deserve a real room.</strong>
+      </p>
+    </section>
+
+    <!-- ───────────────────────── HOW IT WORKS ───────────────────────── -->
+    <section class="section" id="how">
+      <div class="section__head">
+        <p class="kicker">How it works</p>
+        <h2 class="section__title">Three steps to a verdict you can defend.</h2>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal-up">
+          <span class="step__num">01</span>
+          <h3 class="step__title">Write the question</h3>
+          <p class="step__body">
+            State your decision in a plain text file — the kind you'd type into any
+            notes app. Add as much context as you like. No code, no setup.
+          </p>
+          <pre class="step__code"><code><span class="c-hash">##</span> Should we hire a second salesperson now?
+<span class="c-mut">We're at $42k MRR, one founder selling,
+pipeline is full but follow-up is slipping…</span></code></pre>
+        </li>
+
+        <li class="step reveal-up" data-delay="1">
+          <span class="step__num">02</span>
+          <h3 class="step__title">Pick your board</h3>
+          <p class="step__body">
+            Choose advisors whose judgement you trust — each one carries a real
+            thinker's frameworks, biases, and vocabulary. Three to five is the
+            sweet spot.
+          </p>
+          <div class="step__chips">
+            <span class="chip">Naval</span>
+            <span class="chip">Annie Duke</span>
+            <span class="chip">Rob Walling</span>
+            <span class="chip">+ your own</span>
+          </div>
+        </li>
+
+        <li class="step reveal-up" data-delay="2">
+          <span class="step__num">03</span>
+          <h3 class="step__title">Let them deliberate</h3>
+          <p class="step__body">
+            Each advisor writes a position. Then they read each other's and push
+            back. Minds change. You get a final vote, the sharpest dissent, and the
+            reasoning behind both.
+          </p>
+          <div class="step__result">
+            <span class="dot dot--yes"></span><span class="dot dot--cond"></span><span class="dot dot--yes"></span><span class="dot dot--no"></span>
+            <span class="step__result-label">Final vote · 3 of 4 say go</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ───────────────────────── DELIBERATION ───────────────────────── -->
+    <section class="section section--rounds" id="rounds">
+      <div class="section__head">
+        <p class="kicker">The deliberation</p>
+        <h2 class="section__title">A debate, not a one-shot answer.</h2>
+        <p class="section__lede">
+          Single answers flatter you. A real board disagrees, defends, and
+          occasionally changes its mind in the room. advisors.chat runs the
+          rounds so the friction actually happens.
+        </p>
+      </div>
+
+      <div class="rounds">
+        <div class="round reveal-up">
+          <span class="round__tag">Round 1</span>
+          <h3 class="round__title">Seat the room</h3>
+          <p class="round__body">The right advisors for <em>this</em> question are chosen — and you approve the lineup before anyone speaks.</p>
+        </div>
+        <div class="round__line" aria-hidden="true"></div>
+        <div class="round reveal-up" data-delay="1">
+          <span class="round__tag">Round 2</span>
+          <h3 class="round__title">Open positions</h3>
+          <p class="round__body">Every advisor argues their stance in their own voice, with numbers — cost, upside, risk — and an opening vote.</p>
+        </div>
+        <div class="round__line" aria-hidden="true"></div>
+        <div class="round reveal-up" data-delay="2">
+          <span class="round__tag">Round 3</span>
+          <h3 class="round__title">Rebuttals &amp; final vote</h3>
+          <p class="round__body">They read each other and push back — who's wrong and why. Some change their vote. You get the honest tally.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── BOARD ───────────────────────── -->
+    <section class="section" id="board">
+      <div class="section__head">
+        <p class="kicker">Meet the board</p>
+        <h2 class="section__title">Borrow the best judgement in the world.</h2>
+        <p class="section__lede">
+          Start from a roster of sharp, distinctive thinkers — then add the voices
+          you wish were in your corner. Each advisor reasons the way the real one
+          does, not as a generic chatbot.
+        </p>
+      </div>
+
+      <div class="board-grid">
+        <article class="advisor reveal-up">
+          <h3 class="advisor__name">Derek Sivers</h3>
+          <p class="advisor__role">CD Baby founder · contrarian minimalist</p>
+          <p class="advisor__essence">“Hell yes or no.” Filters every choice through radical simplicity and customer delight.</p>
+        </article>
+        <article class="advisor reveal-up" data-delay="1">
+          <h3 class="advisor__name">Naval Ravikant</h3>
+          <p class="advisor__role">AngelList founder · philosopher-investor</p>
+          <p class="advisor__essence">First principles, leverage, and the long game of compounding.</p>
+        </article>
+        <article class="advisor reveal-up" data-delay="2">
+          <h3 class="advisor__name">Alex Hormozi</h3>
+          <p class="advisor__role">Author, $100M Offers · revenue-obsessed</p>
+          <p class="advisor__essence">“Price is only an issue in the absence of value.” Math over vibes.</p>
+        </article>
+        <article class="advisor reveal-up">
+          <h3 class="advisor__name">Annie Duke</h3>
+          <p class="advisor__role">Pro poker champion · author, Thinking in Bets</p>
+          <p class="advisor__essence">Separates decision quality from luck. Probabilities, not certainties.</p>
+        </article>
+        <article class="advisor reveal-up" data-delay="1">
+          <h3 class="advisor__name">Teresa Torres</h3>
+          <p class="advisor__role">Product discovery coach</p>
+          <p class="advisor__essence">“What evidence do we have this solves a real problem?” Kills the build trap.</p>
+        </article>
+        <article class="advisor reveal-up" data-delay="2">
+          <h3 class="advisor__name">Pieter Levels</h3>
+          <p class="advisor__role">Indie maker · @levelsio</p>
+          <p class="advisor__essence">Ship the imperfect MVP today. Let the market decide what survives.</p>
+        </article>
+        <article class="advisor reveal-up">
+          <h3 class="advisor__name">Shane Parrish</h3>
+          <p class="advisor__role">Farnam Street · author, Clear Thinking</p>
+          <p class="advisor__essence">Mental models and systems that beat willpower and reaction.</p>
+        </article>
+        <article class="advisor reveal-up" data-delay="1">
+          <h3 class="advisor__name">Rob Walling</h3>
+          <p class="advisor__role">MicroConf · author, The SaaS Playbook</p>
+          <p class="advisor__essence">Sustainable revenue over venture-scale dreams. Founder-first.</p>
+        </article>
+        <article class="advisor advisor--add reveal-up" data-delay="2">
+          <span class="advisor__plus" aria-hidden="true">+</span>
+          <h3 class="advisor__name">Your own advisor</h3>
+          <p class="advisor__essence">A mentor, a hero, a board member you wish you had. Describe them once; seat them forever.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── DELIVERABLES ───────────────────────── -->
+    <section class="section section--get" id="deliverables">
+      <div class="section__head">
+        <p class="kicker">What you walk away with</p>
+        <h2 class="section__title">Not a chat log. A decision packet.</h2>
+      </div>
+
+      <div class="get-grid">
+        <article class="get reveal-up">
+          <div class="get__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5"/><path d="M8 13h8M8 17h6"/></svg>
+          </div>
+          <h3 class="get__title">The written report</h3>
+          <p class="get__body">Every position and rebuttal in full, a vote tracker showing who moved, the key tensions, and a clear recommendation.</p>
+        </article>
+        <article class="get reveal-up" data-delay="1">
+          <div class="get__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 9h18"/><path d="M8 13l2 2 4-4"/></svg>
+          </div>
+          <h3 class="get__title">An interactive dashboard</h3>
+          <p class="get__body">Sliders for the assumptions that matter — price, conversion, hours — that recalculate the impact live and show the votes shift.</p>
+        </article>
+        <article class="get reveal-up" data-delay="2">
+          <div class="get__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          </div>
+          <h3 class="get__title">A shareable PDF</h3>
+          <p class="get__body">Print-clean and ready to drop in front of a co-founder, a partner, or your own future self when the doubt creeps back in.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── WHO IT'S FOR ───────────────────────── -->
+    <section class="section section--for" id="for">
+      <div class="for__inner">
+        <p class="kicker">Who it's for</p>
+        <h2 class="section__title">Built for the operator without a boardroom.</h2>
+        <p class="for__body">
+          Founders, solo operators, agency owners, and prosumers making the calls
+          that don't fit in a spreadsheet — and don't warrant a $500/hour
+          consultant. The decisions where being half-right is expensive.
+        </p>
+        <ul class="for__tags">
+          <li>Pricing &amp; packaging</li>
+          <li>First or next hire</li>
+          <li>Launch or wait</li>
+          <li>Pivot or persist</li>
+          <li>Build vs. buy</li>
+          <li>Where to focus this quarter</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── MANIFESTO / CLOSE ───────────────────────── -->
+    <section class="close" id="close">
+      <div class="close__inner">
+        <p class="close__big reveal-up">
+          The boardroom,<br /><em>in a file.</em>
+        </p>
+        <p class="close__sub reveal-up" data-delay="1">
+          advisors.chat is opening soon. Leave your email and you'll be among the
+          first in the room.
+        </p>
+        <a class="btn btn--primary btn--lg reveal-up" data-delay="2" href="mailto:david.hague@gmail.com?subject=advisors.chat%20—%20notify%20me&body=I'd%20like%20to%20know%20when%20advisors.chat%20opens%20up.">
+          Get notified at launch
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__brand">advisors<span class="brand__dot">.</span>chat</span>
+      <span class="footer__tag">A board of advisors for every big decision.</span>
+      <span class="footer__year">© 2026</span>
+    </div>
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>
